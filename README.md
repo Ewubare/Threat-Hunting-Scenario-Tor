@@ -80,8 +80,8 @@ Finally the DeviceNetworkEvents table was analyzed to detect Tor network connect
 ```kql
 
 DeviceNetworkEvents
-|where RemotePort in ("9001","9030","9040","9050","9051","9150")
-|project Timestamp,DeviceName,ActionType,RemoteIP,RemotePort,RemoteUrl,InitiatingProcessFileName
+| where RemotePort in ("9001","9030","9040","9050","9051","9150")
+| project Timestamp,DeviceName,ActionType,RemoteIP,RemotePort,RemoteUrl,InitiatingProcessFileName
 
 ```
 <img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/4.png">
