@@ -50,7 +50,6 @@ The DeviceProcessEvents table was then searched to identify if the Tor program h
 DeviceProcessEvents
 | where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.5.4.exe"
 | project Timestamp, DeviceName, FileName, ActionType, ProcessCommandLine, SHA256
-| where DeviceName == "thl-machine"  
 
 ```
 <img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/2.png">
@@ -81,9 +80,8 @@ Finally the DeviceNetworkEvents table was analyzed to detect Tor network connect
 ```kql
 
 DeviceNetworkEvents
-| project Timestamp, DeviceName, InitiatingProcessAccountName, ActionType, RemoteIP, RemotePort, RemoteUrl, InitiatingProcessFileName
-| where InitiatingProcessAccountName != "system"
-| where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150")
+|where RemotePort in ("9001","9030","9040","9050","9051","9150")
+|project Timestamp,DeviceName,ActionType,RemoteIP,RemotePort,RemoteUrl,InitiatingProcessFileName
 
 ```
 <img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/4.png">
