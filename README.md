@@ -32,9 +32,10 @@ The DeviceFileEvents table was searched for any file containing the string "tor"
 
 DeviceFileEvents
 | where FileName contains "tor"
-| project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, ActionType
+| project Timestamp, DeviceName, FileName, ActionType
 
 ```
+<img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/1.png">
 
 ---
 
@@ -46,12 +47,13 @@ The DeviceProcessEvents table was then searched to identify if the Tor program h
 
 ```kql
 
-DeviceProcessEvents  
-| where DeviceName == "threat-hunt-lab"  
-| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe"  
-| project Timestamp, DeviceName, AccountName, ActionType, FileName, FolderPath, SHA256, ProcessCommandLine
-```
+DeviceProcessEvents
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.5.4.exe"
+| project Timestamp, DeviceName, FileName, ActionType, ProcessCommandLine, SHA256
+| where DeviceName == "thl-machine"  
 
+```
+<img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/2.png">
 ---
 
 ### 3. Searched the `DeviceProcessEvents` Table for TOR Browser Execution
@@ -62,12 +64,12 @@ A search of DeviceProcessEvents was conducted to confirm active execution of the
 
 ```kql
 
-DeviceProcessEvents
+DeviceProcessEvents  
 | where FileName == "tor.exe"
-| project Timestamp, DeviceName, InitiatingProcessAccountName, FileName, FolderPath, ActionType, ProcessCommandLine, SHA256
+| project Timestamp, DeviceName, FileName, ActionType, ProcessCommandLine, SHA256
 
 ```
-
+<img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/3.png">
 ---
 
 ### 4. Searched the `DeviceNetworkEvents` Table for TOR Network Connections
@@ -84,10 +86,8 @@ DeviceNetworkEvents
 | where RemotePort in ("9001", "9030", "9040", "9050", "9051", "9150")
 
 ```
-
+<img width="1212" alt="image" src="https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/images/4.png">
 ---
-
-## Chronological Event Timeline 
 
 ## Chronological Event Timeline
 
