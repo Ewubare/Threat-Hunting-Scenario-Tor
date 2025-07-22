@@ -2,7 +2,7 @@
 # Threat Hunt Report: Unauthorized TOR Usage
 - [Scenario Creation](https://github.com/Ewubare/Threat-Hunting-Scenario-Tor/blob/main/threat-hunting-scenario-tor-event-creation.md)
 
-## Technology Used
+## Platforms and Technology Used
 - Windows 10 Virtual Machines (Microsoft Azure)
 - EDR Platform: Microsoft Defender for Endpoint
 - Kusto Query Language (KQL)
